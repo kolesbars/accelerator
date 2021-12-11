@@ -7,14 +7,14 @@ import {
 import { QuestsCatalog } from './components/components';
 import * as S from './home.styled';
 
-const HomePage = () => (
+const HomePage = ({ api }) => (
   <MainLayout>
     <S.Main forwardedAs="main">
       <PageHeading>
         <PageTitle>Выберите тематику</PageTitle>
         <PageSubtext>квесты в Санкт-Петербурге</PageSubtext>
       </PageHeading>
-      <QuestsCatalog />
+      <QuestsCatalog api={api} />
     </S.Main>
   </MainLayout>
 );
