@@ -13,6 +13,7 @@ const DetailedQuest = ({ api }) => {
   const { id } = useParams();
   const currentId = +id;
 
+  const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
   const [questData, setQuestData] = useState(emptyQuest);
 
   const { title, description, type, coverImg, level, peopleCount, duration } =
@@ -26,8 +27,6 @@ const DetailedQuest = ({ api }) => {
   useEffect(() => {
     loadQuestData();
   }, [currentId]);
-
-  const [isBookingModalOpened, setIsBookingModalOpened] = useState(false);
 
   const onBookingBtnClick = () => {
     setIsBookingModalOpened(true);
@@ -72,7 +71,12 @@ const DetailedQuest = ({ api }) => {
           </S.PageDescription>
         </S.PageContentWrapper>
 
-        {isBookingModalOpened && <BookingModal />}
+        {isBookingModalOpened && (
+          <BookingModal
+            setIsBookingModalOpened={setIsBookingModalOpened}
+            api={api}
+          />
+        )}
       </S.Main>
     </MainLayout>
   );

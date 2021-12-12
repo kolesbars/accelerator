@@ -26,8 +26,9 @@ const getIcon = (type) => {
 
 const TabItem = ({ type, isActiveType, onChangeType }) => {
   return (
-    <S.TabItem isActive={isActiveType}>
+    <S.TabItem>
       <S.TabBtn
+        isActive={isActiveType}
         onClick={(evt) => {
           evt.preventDefault();
           onChangeType(type);
