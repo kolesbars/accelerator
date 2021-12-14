@@ -1,5 +1,6 @@
 import logo from 'assets/img/logo.svg';
 import { useHistory } from 'react-router';
+import { useState } from 'react';
 import * as S from './header.styled';
 
 const Header = () => {

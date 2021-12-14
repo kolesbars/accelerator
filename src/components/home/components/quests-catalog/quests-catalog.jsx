@@ -1,7 +1,9 @@
 import QuestItem from './ques-item';
 import TabItem from './tab-item';
+import Loading from 'components/loading/loading';
 import { selectTypesFromQestsData } from 'utils';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import * as S from './quests-catalog.styled';
 
 const DEFAULT_TYPE = 'Все квесты';
@@ -9,11 +11,17 @@ const DEFAULT_TYPE = 'Все квесты';
 const QuestsCatalog = ({ api }) => {
   const [quests, setQuests] = useState([]);
   const [currentType, setCurrentType] = useState(DEFAULT_TYPE);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const history = useHistory();
 
   const loadQuests = async () => {
-    const { data } = await api.get('/quests');
-
-    setQuests(data);
+    try {
+      const { data } = await api.get('/quests');
+      setIsLoaded(true);
+      setQuests(data);
+    } catch {
+      history.push('/not-found-screen');
+    }
   };
 
   useEffect(() => {
@@ -24,7 +32,7 @@ const QuestsCatalog = ({ api }) => {
     setCurrentType(type);
   };
 
-  return (
+  return isLoaded ? (
     <>
       <S.Tabs>
         {selectTypesFromQestsData(quests).map((type) => {
@@ -49,6 +57,8 @@ const QuestsCatalog = ({ api }) => {
           })}
       </S.QuestsList>
     </>
+  ) : (
+    <Loading />
   );
 };
 
