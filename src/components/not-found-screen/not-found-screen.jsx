@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from 'const';
 import * as S from './not-found-screen.styled';
 
 function NotFoundScreen(): JSX.Element {
@@ -11,7 +12,7 @@ function NotFoundScreen(): JSX.Element {
             <S.Text>404 - The Page can not be found</S.Text>
           </S.NotFound404>
           <S.Link>
-            <Link to="/">Go TO Homepage</Link>
+            <Link to={AppRoute.Home}>Go TO Homepage</Link>
           </S.Link>
         </S.NotFound>
       </S.NotFoundScreen>

@@ -1,6 +1,7 @@
 import { Map, TileLayer } from 'leaflet';
 import { useEffect, useState } from 'react';
 
+const ZOOM = 15;
 const useMap = (mapRef, city) => {
   const [map, setMap] = useState(null);
 
@@ -8,10 +9,10 @@ const useMap = (mapRef, city) => {
     if (mapRef.current !== null && map === null) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.lat,
-          lng: city.lng,
+          lat: city.Lat,
+          lng: city.Lng,
         },
-        zoom: 15,
+        zoom: ZOOM,
       });
 
       const layer = new TileLayer(

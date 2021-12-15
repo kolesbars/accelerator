@@ -1,12 +1,7 @@
 import { MainLayout, PageTitle, PageSubtext } from 'components/common/common';
+import { City, Point, ContactsInfo } from 'const';
 import Map from 'components/map/map';
 import * as S from './contacts.styled';
-
-const city = { lat: 59.9686, lng: 30.3141 };
-const point = {
-  lat: 59.968137,
-  lng: 30.316272,
-};
 
 const Contacts = () => (
   <MainLayout>
@@ -33,21 +28,21 @@ const Contacts = () => (
 
             <S.ContactTitle>Телефон</S.ContactTitle>
             <S.ContactValue>
-              <S.ContactLink href="tel:8 (800) 333-55-99">
-                8 (800) 333-55-99
+              <S.ContactLink href={`tel:${ContactsInfo.Phone}`}>
+                {ContactsInfo.Phone}
               </S.ContactLink>
             </S.ContactValue>
 
             <S.ContactTitle>E-mail</S.ContactTitle>
             <S.ContactValue>
-              <S.ContactLink href="mailto:info@escape-room.ru">
-                info@escape-room.ru
+              <S.ContactLink href={`mailto:${ContactsInfo.EMail}`}>
+                {ContactsInfo.EMail}
               </S.ContactLink>
             </S.ContactValue>
           </S.ContactsList>
 
           <S.ContactsMap>
-            <Map city={city} point={point} />;
+            <Map city={City} point={Point} />;
           </S.ContactsMap>
         </S.Contacts>
       </S.ContentWrapper>

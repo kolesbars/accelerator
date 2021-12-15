@@ -4,6 +4,7 @@ import Loading from 'components/loading/loading';
 import { selectTypesFromQestsData } from 'utils';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import { ApiRoute, AppRoute } from 'const';
 import * as S from './quests-catalog.styled';
 
 const DEFAULT_TYPE = 'Все квесты';
@@ -16,11 +17,11 @@ const QuestsCatalog = ({ api }) => {
 
   const loadQuests = async () => {
     try {
-      const { data } = await api.get('/quests');
+      const { data } = await api.get(ApiRoute.Quests);
       setIsLoaded(true);
       setQuests(data);
     } catch {
-      history.push('/not-found-screen');
+      history.push(AppRoute.NotFoundScreen);
     }
   };
 

@@ -1,13 +1,16 @@
 import { useRef, useEffect } from 'react';
 import { Icon, Marker } from 'leaflet';
 import useMap from '../../hooks/useMap';
+import { IconSizes } from 'const';
 import 'leaflet/dist/leaflet.css';
 
+const ICON_URL =
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
+
 const defaultCustomIcon = new Icon({
-  iconUrl:
-    'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg',
-  iconSize: [40, 40],
-  iconAnchor: [20, 40],
+  iconUrl: ICON_URL,
+  iconSize: IconSizes.Size,
+  iconAnchor: IconSizes.Anchor,
 });
 
 const Map = ({ city, point }) => {
@@ -17,8 +20,8 @@ const Map = ({ city, point }) => {
   useEffect(() => {
     if (map) {
       const marker = new Marker({
-        lat: point.lat,
-        lng: point.lng,
+        lat: point.Lat,
+        lng: point.Lng,
       });
 
       marker.setIcon(defaultCustomIcon).addTo(map);

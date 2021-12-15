@@ -1,10 +1,14 @@
 import logo from 'assets/img/logo.svg';
 import { useHistory } from 'react-router';
 import { useState } from 'react';
+import { AppRoute } from 'const';
+import { ContactsInfo } from 'const';
 import * as S from './header.styled';
 
 const Header = () => {
   const history = useHistory();
+
+  const [currentTab, setCurrentTab] = useState('Квесты');
 
   return (
     <S.StyledHeader>
@@ -17,7 +21,7 @@ const Header = () => {
             height="50"
             onClick={(evt) => {
               evt.preventDefault();
-              history.push('/');
+              history.push(AppRoute.Home);
             }}
           />
         </S.Logo>
@@ -25,9 +29,7 @@ const Header = () => {
         <S.Navigation>
           <S.Links>
             <S.LinkItem>
-              <S.Link $isActiveLink to="/">
-                Квесты
-              </S.Link>
+              <S.Link $isActiveLink>Квесты</S.Link>
             </S.LinkItem>
 
             <S.LinkItem>
@@ -47,7 +49,9 @@ const Header = () => {
             </S.LinkItem>
           </S.Links>
         </S.Navigation>
-        <S.Phone href="tel:88003335599">8 (800) 333-55-99</S.Phone>
+        <S.Phone href={`tel:${ContactsInfo.Phone}`}>
+          {ContactsInfo.Phone}
+        </S.Phone>
       </S.HeaderWrapper>
     </S.StyledHeader>
   );

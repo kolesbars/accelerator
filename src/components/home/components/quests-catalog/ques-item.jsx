@@ -1,5 +1,6 @@
 import { useHistory } from 'react-router';
 import { getQuestLevel } from 'utils';
+import { AppRoute } from 'const';
 import { ReactComponent as IconPerson } from 'assets/img/icon-person.svg';
 import { ReactComponent as IconPuzzle } from 'assets/img/icon-puzzle.svg';
 import * as S from './quests-catalog.styled';
@@ -10,13 +11,14 @@ const QuestItem = ({ questData }) => {
   const history = useHistory();
 
   return (
-    <S.QuestItem
-      onClick={(evt) => {
-        evt.preventDefault();
-        history.push(`/detailed-quest/${id}`);
-      }}
-    >
-      <S.QuestItemLink to="/quest">
+    <S.QuestItem>
+      <S.QuestItemLink
+        to="#"
+        onClick={(evt) => {
+          evt.preventDefault();
+          history.push(`${AppRoute.DetailedQuest}/${id}`);
+        }}
+      >
         <S.Quest>
           <S.QuestImage
             src={previewImg}

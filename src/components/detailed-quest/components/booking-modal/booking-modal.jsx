@@ -1,11 +1,8 @@
 import * as S from './booking-modal.styled';
+import { Message, ApiRoute } from 'const';
 import { toast } from 'react-toastify';
 import { ReactComponent as IconClose } from 'assets/img/icon-close.svg';
 import { useState } from 'react/cjs/react.development';
-import { useRef } from 'react';
-
-const SUCCESSFUL_BOOKING = 'Бронирование прошло успешно';
-const FAIL_BOOKING = 'Не удалось забронировать';
 
 const BookingModal = ({ setIsBookingModalOpened, api }) => {
   const [orderData, setOrderData] = useState({
@@ -14,44 +11,29 @@ const BookingModal = ({ setIsBookingModalOpened, api }) => {
     phone: '',
     isLegal: false,
   });
-  const [isDisabled, setIsDisabled] = useState(false);
 
-  const nameRef = useRef(null);
-  const phoneRef = useRef(null);
-  const peopleCountRef = useRef(null);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleCloseModal = () => {
     setIsBookingModalOpened(false);
-    setOrderData({
-      name: '',
-      peopleCount: null,
-      phone: '',
-      isLegal: false,
-    });
   };
 
   const sendOrder = async () => {
+    setIsDisabled(true);
+
     try {
-      await api.post('/orders', orderData);
+      await api.post(ApiRoute.Orders, orderData);
+
+      toast.info(Message.SUCCESSFUL_BOOKING);
 
       setIsBookingModalOpened(false);
-
-      setOrderData({
-        name: '',
-        peopleCount: null,
-        phone: '',
-        isLegal: false,
-      });
-
-      toast.info(SUCCESSFUL_BOOKING);
     } catch {
-      toast.info(FAIL_BOOKING);
+      toast.info(Message.FAIL_BOOKING);
       setIsDisabled(false);
     }
   };
 
   const hadleSendOrder = () => {
-    setIsDisabled(true);
     sendOrder();
   };
 
@@ -84,7 +66,6 @@ const BookingModal = ({ setIsBookingModalOpened, api }) => {
               id="booking-name"
               name="booking-name"
               placeholder="Имя"
-              ref={nameRef}
               required
               disabled={isDisabled}
               onInput={({ target }) => {
@@ -102,7 +83,6 @@ const BookingModal = ({ setIsBookingModalOpened, api }) => {
               name="booking-phone"
               placeholder="Телефон (xxx-xxx-xx-xx)"
               pattern="\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
-              ref={phoneRef}
               required
               disabled={isDisabled}
               onInput={({ target }) => {
@@ -119,7 +99,6 @@ const BookingModal = ({ setIsBookingModalOpened, api }) => {
               id="booking-people"
               name="booking-people"
               placeholder="Количество участников"
-              ref={peopleCountRef}
               min="2"
               max={8}
               required

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
-import { emptyQuest } from 'const';
+import { emptyQuest, ApiRoute, AppRoute } from 'const';
 import { getQuestLevel, getQuestType } from 'utils';
 import { MainLayout } from 'components/common/common';
 import { ReactComponent as IconClock } from 'assets/img/icon-clock.svg';
@@ -25,11 +25,11 @@ const DetailedQuest = ({ api }) => {
 
   const loadQuestData = async () => {
     try {
-      const { data } = await api.get(`/quests/${currentId}`);
+      const { data } = await api.get(`${ApiRoute.Quests}/${currentId}`);
       setIsloaded(true);
       setQuestData(data);
     } catch {
-      history.push('/not-found-screen');
+      history.push(AppRoute.NotFoundScreen);
     }
   };
 

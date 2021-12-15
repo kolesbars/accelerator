@@ -9,6 +9,7 @@ import Contacts from 'components/contacts/contacts';
 import Home from 'components/home/home';
 import NotFoundScreen from 'components/not-found-screen/not-found-screen';
 import { appTheme } from './common';
+import { AppRoute } from 'const';
 import * as S from './app.styled';
 
 const App = ({ api }) => (
@@ -16,17 +17,17 @@ const App = ({ api }) => (
     <S.GlobalStyle />
     <Router>
       <Switch>
-        <Route exact path="/detailed-quest/:id">
+        <Route exact path={`${AppRoute.DetailedQuest}/:id`}>
           <DetailedQuest api={api} />
         </Route>
-        <Route exact path="/contacts">
+        <Route exact path={AppRoute.Contacts}>
           <Contacts />
         </Route>
-        <Route exact path="/">
+        <Route exact path={AppRoute.Home}>
           <Home api={api} />
         </Route>
         <Route>
-          <NotFoundScreen path="/not-found-screen" />
+          <NotFoundScreen path={AppRoute.NotFoundScreen} />
         </Route>
       </Switch>
     </Router>

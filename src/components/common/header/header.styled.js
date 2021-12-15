@@ -82,6 +82,7 @@ const Link = styled(RouterLink)`
     `}
 
   &:focus,
+  &:active,
   &:hover {
     color: ${({ theme }) => theme.color.tangerine};
   }
