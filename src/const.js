@@ -40,6 +40,9 @@ const AppRoute = {
   Contacts: '/contacts',
   DetailedQuest: '/detailed-quest',
   NotFoundScreen: '/not-found-screen',
+  Newbies: '/newbies',
+  Reviews: '/reviews',
+  Promo: '/promo',
 };
 
 const ApiRoute = {

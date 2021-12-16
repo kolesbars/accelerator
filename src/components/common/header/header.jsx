@@ -1,14 +1,11 @@
 import logo from 'assets/img/logo.svg';
 import { useHistory } from 'react-router';
-import { useState } from 'react';
-import { AppRoute } from 'const';
-import { ContactsInfo } from 'const';
+import { AppRoute, ContactsInfo } from 'const';
+import NavItem from './nav-item';
 import * as S from './header.styled';
 
 const Header = () => {
   const history = useHistory();
-
-  const [currentTab, setCurrentTab] = useState('Квесты');
 
   return (
     <S.StyledHeader>
@@ -28,25 +25,15 @@ const Header = () => {
 
         <S.Navigation>
           <S.Links>
-            <S.LinkItem>
-              <S.Link $isActiveLink>Квесты</S.Link>
-            </S.LinkItem>
+            <NavItem textContent="Квесты" route={AppRoute.Home} />
 
-            <S.LinkItem>
-              <S.Link to="#">Новичкам</S.Link>
-            </S.LinkItem>
+            <NavItem textContent="Новичкам" route={AppRoute.Newbies} />
 
-            <S.LinkItem>
-              <S.Link to="#">Отзывы</S.Link>
-            </S.LinkItem>
+            <NavItem textContent="Отзывы" route={AppRoute.Reviews} />
 
-            <S.LinkItem>
-              <S.Link to="#">Акции</S.Link>
-            </S.LinkItem>
+            <NavItem textContent="Акции" route={AppRoute.Promo} />
 
-            <S.LinkItem>
-              <S.Link to="/contacts">Контакты</S.Link>
-            </S.LinkItem>
+            <NavItem textContent="Контакты" route={AppRoute.Contacts} />
           </S.Links>
         </S.Navigation>
         <S.Phone href={`tel:${ContactsInfo.Phone}`}>
